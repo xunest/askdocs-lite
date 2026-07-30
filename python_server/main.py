@@ -70,18 +70,13 @@ def resolve_embedding_model(api_config: dict) -> tuple[str, str, str]:
             embedding_model = "doubao-embedding"
         elif "dashscope" in api_base:
             embedding_model = "text-embedding-v3"
-        elif "deepseek" in api_base:
-            embedding_model = "BAAI/bge-m3"
-            # DeepSeek 官方无 embedding，且未独立配置时回退到硅基流动
-            if not emb_base:
-                api_base = "https://api.siliconflow.cn/v1"
-        elif "moonshot" in api_base:
-            embedding_model = "moonshot-embedding"
         elif "bigmodel" in api_base or "zhipu" in api_base:
             embedding_model = "embedding-3"
         elif "localhost" in api_base or "127.0.0.1" in api_base:
             embedding_model = "nomic-embed-text"
         else:
+            # 兜底：OpenAI 兼容默认（DeepSeek、Moonshot 等官方无 embedding 的服务商会落此，
+            # 高级索引需在「高级模型设置」中单独配置支持 embedding 的服务商）
             embedding_model = "text-embedding-3-small"
     return embedding_model, api_base, api_key
 
@@ -97,11 +92,8 @@ def resolve_rerank_model(api_config: dict) -> tuple[Optional[str], str, str]:
     api_base = (rr_base or api_config["api_base"]).rstrip("/")
     api_key = rr_key or api_config["api_key"]
     if not rerank_model:
-        if "siliconflow" in api_base or "deepseek" in api_base:
+        if "siliconflow" in api_base:
             rerank_model = "BAAI/bge-reranker-v2-m3"
-            if "deepseek" in api_base and not rr_base:
-                # DeepSeek 官方无 rerank，且未独立配置时回退到硅基流动
-                api_base = "https://api.siliconflow.cn/v1"
         elif "bigmodel" in api_base or "zhipu" in api_base:
             # 智谱 BigModel：端点 /paas/v4/rerank，模型名固定为 rerank
             rerank_model = "rerank"

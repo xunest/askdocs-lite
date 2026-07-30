@@ -114,12 +114,11 @@ export interface PresetConfig {
 }
 
 export const PRESET_CONFIGS: PresetConfig[] = [
-  { name: 'DeepSeek', provider: 'deepseek', apiBase: 'https://api.deepseek.com/v1', model: 'deepseek-chat', apiKeyPlaceholder: 'sk-xxx...', description: 'DeepSeek 深度求索' },
-  { name: 'OpenAI', provider: 'openai', apiBase: 'https://api.openai.com/v1', model: 'gpt-4o', apiKeyPlaceholder: 'sk-xxx...', description: 'OpenAI GPT 系列' },
-  { name: '通义千问', provider: 'qwen', apiBase: 'https://dashscope.aliyuncs.com/compatible-mode/v1', model: 'qwen-plus', apiKeyPlaceholder: 'sk-xxx...', description: '阿里云通义千问' },
-  { name: 'Moonshot', provider: 'moonshot', apiBase: 'https://api.moonshot.cn/v1', model: 'moonshot-v1-8k', apiKeyPlaceholder: 'sk-xxx...', description: '月之暗面 Kimi' },
-  { name: '智谱 AI', provider: 'zhipu', apiBase: 'https://open.bigmodel.cn/api/paas/v4', model: 'glm-4', apiKeyPlaceholder: 'xxx.xxx', description: '智谱清言 GLM 系列' },
-  { name: '硅基流动', provider: 'siliconflow', apiBase: 'https://api.siliconflow.cn/v1', model: 'deepseek-ai/DeepSeek-V3', apiKeyPlaceholder: 'sk-xxx...', description: '硅基流动 SiliconFlow' },
-  { name: '火山引擎', provider: 'volcengine', apiBase: 'https://ark.cn-beijing.volces.com/api/v3', model: 'doubao-1.5-pro-32k', apiKeyPlaceholder: 'xxx', description: '火山引擎豆包 Doubao' },
-  { name: '本地 Ollama', provider: 'ollama', apiBase: 'http://localhost:11434/v1', model: 'llama3', apiKeyPlaceholder: 'ollama', description: '本地部署 Ollama' },
+  { name: 'DeepSeek', provider: 'deepseek', apiBase: 'https://api.deepseek.com/v1', model: 'deepseek-v4-pro', apiKeyPlaceholder: 'sk-xxx...', description: 'DeepSeek 深度求索（旗舰 V4-Pro，经济版 deepseek-v4-flash）' },
+  { name: '硅基流动 SiliconFlow', provider: 'siliconflow', apiBase: 'https://api.siliconflow.cn/v1', model: 'deepseek-ai/DeepSeek-V3', apiKeyPlaceholder: 'sk-xxx...', description: '硅基流动，含 Embedding：bge-m3，Rerank：bge-reranker-v2-m3' },
+  { name: '通义千问 Qwen', provider: 'qwen', apiBase: 'https://dashscope.aliyuncs.com/compatible-mode/v1', model: 'qwen3.7-max', apiKeyPlaceholder: 'sk-xxx...', description: '阿里云通义千问（qwen3.7-max 旗舰）' },
+  { name: '月之暗面 Kimi', provider: 'moonshot', apiBase: 'https://api.moonshot.cn/v1', model: 'kimi-k3', apiKeyPlaceholder: 'sk-xxx...', description: '月之暗面 Kimi K3，超长上下文 1M' },
+  { name: '智谱 AI GLM', provider: 'glm', apiBase: 'https://open.bigmodel.cn/api/paas/v4', model: 'glm-5', apiKeyPlaceholder: 'xxx.xxx', description: '智谱清言 GLM 系列（glm-5 旗舰），官方提供 Embedding / Rerank' },
+  { name: '火山引擎 Doubao', provider: 'volcengine', apiBase: 'https://ark.cn-beijing.volces.com/api/v3', model: 'doubao-seed-2-0-pro', apiKeyPlaceholder: 'xxx', description: '火山引擎豆包 Doubao Seed 2.0' },
+  { name: '本地 Ollama', provider: 'ollama', apiBase: 'http://localhost:11434/v1', model: 'llama3.2', apiKeyPlaceholder: 'ollama', description: '本地部署 Ollama 大模型' },
 ];

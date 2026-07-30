@@ -98,19 +98,23 @@ npm run dev
 
 ## 🔌 API 配置预设
 
-| 服务商 | API Base | 聊天模型 | 自动推断 Embedding | 自动推断 Rerank |
+| 服务商 | API Base | 聊天模型（示例，最新） | 自动推断 Embedding | 自动推断 Rerank |
 |--------|----------|----------|--------------------|-----------------|
-| DeepSeek | https://api.deepseek.com/v1 | deepseek-chat | BAAI/bge-m3（经硅基流动）| BAAI/bge-reranker-v2-m3（经硅基流动）|
-| OpenAI | https://api.openai.com/v1 | gpt-4o | text-embedding-3-small | —（跳过）|
-| 通义千问 | https://dashscope.aliyuncs.com/compatible-mode/v1 | qwen-plus | text-embedding-v3 | gte-rerank |
-| Moonshot | https://api.moonshot.cn/v1 | moonshot-v1-8k | moonshot-embedding | —（跳过）|
-| 智谱 AI | https://open.bigmodel.cn/api/paas/v4 | glm-4 | embedding-3 | rerank |
+| DeepSeek | https://api.deepseek.com/v1 | deepseek-v4-pro（经济版 deepseek-v4-flash）| —（官方无，需高级设置单配）| —（官方无，跳过）|
 | 硅基流动 | https://api.siliconflow.cn/v1 | deepseek-ai/DeepSeek-V3 | BAAI/bge-m3 | BAAI/bge-reranker-v2-m3 |
-| 火山引擎 | https://ark.cn-beijing.volces.com/api/v3 | doubao-1.5-pro-32k | doubao-embedding | —（跳过）|
-| 本地 Ollama | http://localhost:11434/v1 | llama3 | nomic-embed-text | —（跳过）|
+| 通义千问 | https://dashscope.aliyuncs.com/compatible-mode/v1 | qwen3.7-max | text-embedding-v3 | gte-rerank |
+| 月之暗面 Kimi | https://api.moonshot.cn/v1 | kimi-k3 | —（官方无，需高级设置单配）| —（官方无，跳过）|
+| 智谱 AI | https://open.bigmodel.cn/api/paas/v4 | glm-5 | embedding-3 | rerank |
+| 火山引擎 | https://ark.cn-beijing.volces.com/api/v3 | doubao-seed-2-0-pro | doubao-embedding | —（跳过）|
+| 本地 Ollama | http://localhost:11434/v1 | llama3.2 | nomic-embed-text | —（跳过）|
 
+> 聊天模型名以各服务商官方为准，可能随版本更新变化；上表为撰写时的最新示例，实际使用时填服务商当前可用的模型 ID 即可。
 > 未显式配置时，后端会根据 API Base 自动推断 Embedding / Rerank 模型（见 `main.py` 的 `resolve_embedding_model` / `resolve_rerank_model`）。
-> Rerank 自动推断覆盖：硅基流动、DeepSeek（经硅基流动）、智谱 BigModel、Jina、通义千问；其余服务商（如火山引擎、OpenAI）不提供兼容的 `/rerank` 接口，会自动跳过重排、仅用向量检索结果，不影响问答。如需使用其他服务商的 rerank，可在「高级模型设置」中手动填写。
+> Rerank 自动推断覆盖：硅基流动、智谱 BigModel、Jina、通义千问；其余服务商（如 DeepSeek、火山引擎、OpenAI）不提供兼容的 `/rerank` 接口，会自动跳过重排、仅用向量检索结果，不影响问答。如需使用其他服务商的 rerank，可在「高级模型设置」中手动填写。
+>
+> ⚠️ **Embedding / Rerank 取决于服务商能力，与聊天模型无关**。例如 DeepSeek 官方只提供聊天模型、不提供 Embedding/Rerank，系统**不会**替你切换到其他服务商（你的 Key 通常也不能跨服务商使用）。此时：
+> - 用**基础索引**（关键词检索）即可正常问答，无需 Embedding；
+> - 若要用**高级索引**（向量语义检索），请在「高级模型设置」中为 Embedding（及可选的 Rerank）单独填写一个支持该能力的服务商 Base 与 Key（如硅基流动）。
 
 ## ✂️ 分段参数说明
 
