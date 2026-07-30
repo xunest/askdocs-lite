@@ -100,11 +100,19 @@ def resolve_rerank_model(api_config: dict) -> tuple[Optional[str], str, str]:
         if "siliconflow" in api_base or "deepseek" in api_base:
             rerank_model = "BAAI/bge-reranker-v2-m3"
             if "deepseek" in api_base and not rr_base:
+                # DeepSeek 官方无 rerank，且未独立配置时回退到硅基流动
                 api_base = "https://api.siliconflow.cn/v1"
+        elif "bigmodel" in api_base or "zhipu" in api_base:
+            # 智谱 BigModel：端点 /paas/v4/rerank，模型名固定为 rerank
+            rerank_model = "rerank"
+        elif "jina" in api_base:
+            # Jina：/v1/rerank 标准 OpenAI 兼容格式
+            rerank_model = "jina-reranker-v2-base-multilingual"
         elif "dashscope" in api_base:
+            # 通义：rerank 使用特殊端点（非 /rerank），简单拼接可能失败，失败时自动跳过
             rerank_model = "gte-rerank"
         else:
-            # 其他服务商多数不提供 OpenAI 兼容 rerank 接口，返回 None 以优雅跳过
+            # 其他服务商多数不提供 OpenAI 兼容 /rerank 接口，返回 None 以优雅跳过
             rerank_model = None
     return rerank_model, api_base, api_key
 

@@ -104,12 +104,13 @@ npm run dev
 | OpenAI | https://api.openai.com/v1 | gpt-4o | text-embedding-3-small | —（跳过）|
 | 通义千问 | https://dashscope.aliyuncs.com/compatible-mode/v1 | qwen-plus | text-embedding-v3 | gte-rerank |
 | Moonshot | https://api.moonshot.cn/v1 | moonshot-v1-8k | moonshot-embedding | —（跳过）|
-| 智谱 AI | https://open.bigmodel.cn/api/paas/v4 | glm-4 | embedding-3 | —（跳过）|
+| 智谱 AI | https://open.bigmodel.cn/api/paas/v4 | glm-4 | embedding-3 | rerank |
 | 硅基流动 | https://api.siliconflow.cn/v1 | deepseek-ai/DeepSeek-V3 | BAAI/bge-m3 | BAAI/bge-reranker-v2-m3 |
 | 火山引擎 | https://ark.cn-beijing.volces.com/api/v3 | doubao-1.5-pro-32k | doubao-embedding | —（跳过）|
 | 本地 Ollama | http://localhost:11434/v1 | llama3 | nomic-embed-text | —（跳过）|
 
-> 未显式配置时，后端会根据 API Base 自动推断 Embedding / Rerank 模型（见 `main.py` 的 `resolve_embedding_model` / `resolve_rerank_model`）。无法推断 Rerank 的服务商会自动跳过重排，不影响检索。
+> 未显式配置时，后端会根据 API Base 自动推断 Embedding / Rerank 模型（见 `main.py` 的 `resolve_embedding_model` / `resolve_rerank_model`）。
+> Rerank 自动推断覆盖：硅基流动、DeepSeek（经硅基流动）、智谱 BigModel、Jina、通义千问；其余服务商（如火山引擎、OpenAI）不提供兼容的 `/rerank` 接口，会自动跳过重排、仅用向量检索结果，不影响问答。如需使用其他服务商的 rerank，可在「高级模型设置」中手动填写。
 
 ## ✂️ 分段参数说明
 
