@@ -1,0 +1,305 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-size: 14px;
+}
+
+:root {
+  /* 背景层次：暖白基调，对标豆包柔和观感 */
+  --td-bg-color-page: #f6f7fb;
+  --td-bg-color-container: #ffffff;
+  --td-bg-color-component: #f2f3f8;
+  --td-bg-color-component-hover: #e9ebf3;
+  --td-bg-color-popup: #ffffff;
+
+  /* 主色：豆包蓝紫 */
+  --td-brand-color: #4f5bd5;
+  --td-brand-color-hover: #5f6ce0;
+  --td-brand-color-active: #414bc0;
+  --td-brand-color-light: #eef0fd;
+
+  /* 文本 */
+  --td-text-color-primary: #1c1f26;
+  --td-text-color-secondary: #6b7080;
+  --td-text-color-placeholder: #a8adbb;
+
+  /* 描边 */
+  --td-component-border: #ebedf2;
+  --td-component-stroke: #e2e4ec;
+
+  /* 圆角与阴影 */
+  --app-radius-sm: 8px;
+  --app-radius-md: 12px;
+  --app-radius-lg: 16px;
+  --app-shadow-sm: 0 2px 8px rgba(28, 31, 38, 0.06);
+  --app-shadow-md: 0 6px 20px rgba(28, 31, 38, 0.08);
+}
+
+/* TDesign 组件圆角联动 */
+:root {
+  --td-radius-small: 8px;
+  --td-radius-default: 10px;
+  --td-radius-medium: 12px;
+  --td-radius-large: 14px;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  background-color: var(--td-bg-color-page);
+  color: var(--td-text-color-primary);
+}
+
+.chat-markdown {
+  line-height: 1.7;
+  word-break: break-word;
+}
+
+.chat-markdown p {
+  margin-bottom: 0.75em;
+}
+
+.chat-markdown p:last-child {
+  margin-bottom: 0;
+}
+
+.chat-markdown h1, .chat-markdown h2, .chat-markdown h3,
+.chat-markdown h4, .chat-markdown h5, .chat-markdown h6 {
+  font-weight: 600;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  line-height: 1.4;
+}
+
+.chat-markdown h1 { font-size: 1.25em; }
+.chat-markdown h2 { font-size: 1.15em; }
+.chat-markdown h3 { font-size: 1.05em; }
+
+.chat-markdown ul, .chat-markdown ol {
+  margin-left: 1.5em;
+  margin-bottom: 0.75em;
+}
+
+.chat-markdown li {
+  margin-bottom: 0.25em;
+}
+
+.chat-markdown ul li {
+  list-style-type: disc;
+}
+
+.chat-markdown ol li {
+  list-style-type: decimal;
+}
+
+.chat-markdown code {
+  background: var(--td-bg-color-component);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.88em;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+.chat-markdown pre {
+  background: #1e1e2e;
+  padding: 14px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 0.75em;
+}
+
+.chat-markdown pre code {
+  background: none;
+  padding: 0;
+  color: #cdd6f4;
+  font-size: 0.88em;
+}
+
+.chat-markdown strong {
+  font-weight: 600;
+  color: var(--td-text-color-primary);
+}
+
+.chat-markdown em {
+  font-style: italic;
+}
+
+.chat-markdown blockquote {
+  border-left: 3px solid var(--td-brand-color);
+  padding-left: 12px;
+  margin-left: 0;
+  margin-bottom: 0.75em;
+  color: var(--td-text-color-secondary);
+}
+
+.chat-markdown hr {
+  border: none;
+  border-top: 1px solid var(--td-component-border);
+  margin: 1em 0;
+}
+
+.chat-markdown table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 0.75em;
+}
+
+.chat-markdown th, .chat-markdown td {
+  border: 1px solid var(--td-component-border);
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.chat-markdown th {
+  background: var(--td-bg-color-component);
+  font-weight: 600;
+}
+
+.upload-zone {
+  border: 2px dashed var(--td-component-border);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.upload-zone:hover {
+  border-color: var(--td-brand-color);
+  background: var(--td-brand-color-light);
+}
+
+.upload-zone.dragover {
+  border-color: var(--td-brand-color);
+  background: var(--td-brand-color-light);
+  transform: scale(1.02);
+}
+
+.source-card {
+  background: var(--td-bg-color-component);
+  border: 1px solid var(--td-component-border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.85em;
+}
+
+.animate-cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ===== 全局观感精修（对标豆包）===== */
+
+/* 更细腻的滚动条 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d3d6e0 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #d3d6e0;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #b9bdcc;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* TDesign 主按钮渐变与柔和阴影，贴近豆包质感 */
+.t-button--theme-primary {
+  background: linear-gradient(135deg, #5b67e0 0%, #4f5bd5 100%) !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(79, 91, 213, 0.24) !important;
+}
+.t-button--theme-primary:hover {
+  background: linear-gradient(135deg, #6b76e8 0%, #5f6ce0 100%) !important;
+  box-shadow: 0 6px 16px rgba(79, 91, 213, 0.3) !important;
+}
+
+/* 输入类组件聚焦时的柔和光晕 */
+.t-input--focused,
+.t-textarea__inner:focus {
+  box-shadow: 0 0 0 3px var(--td-brand-color-light) !important;
+}
+
+/* 弹窗更大圆角与柔和阴影 */
+.t-dialog {
+  border-radius: var(--app-radius-lg) !important;
+  box-shadow: var(--app-shadow-md) !important;
+}
+
+/* 底部工具栏选择器：无边框胶囊，悬停显淡底 */
+.toolbar-select .t-input {
+  border-radius: 999px !important;
+  transition: background-color 0.2s ease;
+  padding-left: 10px;
+  padding-right: 6px;
+  background-color: var(--td-bg-color-component) !important;
+}
+.toolbar-select .t-input:hover {
+  background-color: var(--td-bg-color-component-hover) !important;
+}
+.toolbar-select .t-input__inner,
+.toolbar-select .t-input__prefix {
+  color: var(--td-text-color-secondary);
+}
+.toolbar-select .t-input.t-is-focused {
+  box-shadow: 0 0 0 2px var(--td-brand-color-light) !important;
+}
+
+/* 输入框卡片：更明显的边框与阴影，聚焦高亮 */
+.chat-input-box {
+  border: 1.5px solid var(--td-component-stroke);
+  box-shadow: var(--app-shadow-md);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.chat-input-box:hover {
+  border-color: #c4c8d4;
+}
+.chat-input-box:focus-within {
+  border-color: var(--td-brand-color);
+  box-shadow: 0 0 0 3px var(--td-brand-color-light), var(--app-shadow-md);
+}
+
+/* 知识库选择器：限制最大宽度，名字过长时截断为省略号 */
+.toolbar-select-kb .t-input {
+  max-width: 340px;
+}
+/* 图标+文字合并为一个整体，杜绝多选模式下的换行错位 */
+.kb-value-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 260px;
+  line-height: 20px;
+  height: 20px;
+  color: var(--td-text-color-secondary);
+}
+.kb-value-text > svg {
+  flex-shrink: 0;
+  display: block;
+}
+.kb-value-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 让下拉箭头与内容垂直居中 */
+.toolbar-select-kb .t-input__suffix,
+.toolbar-select-kb .t-fake-arrow {
+  display: inline-flex;
+  align-items: center;
+}
+
